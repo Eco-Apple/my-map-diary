@@ -22,21 +22,41 @@ struct CameraScreen: View {
     
     var body: some View {
         ZStack {
-            Camera()
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack {
+            if let uiImage = viewModel.camera.uiImage {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
                 Spacer()
+                VStack {
+                    Spacer()
+                    HStack {
+                        Button("Cancel") {
+                            viewModel.camera.photoData = nil
+                        }
+                        Spacer()
+                        Button("Save", action: action)
+                    }
+                }
+            } else {
+                Camera(camera: viewModel.camera)
+                    .edgesIgnoringSafeArea(.all)
                 
-                HStack {
-                    Button(action: action) {
-                       Circle()
-                            .fill(Color.red)
-                            .frame(width: 70, height: 70)
-                            .shadow(radius: 5)
+                VStack {
+                    Spacer()
+                    
+                    HStack {
+                        Button(action: viewModel.camera.takePicture) {
+                            Circle()
+                                .fill(Color.red)
+                                .frame(width: 70, height: 70)
+                                .shadow(radius: 5)
+                        }
                     }
                 }
             }
+        }
+        .onAppear {
+            viewModel.camera.checkAuthorization()
         }
     }
     
