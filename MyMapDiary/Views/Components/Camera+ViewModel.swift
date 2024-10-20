@@ -16,7 +16,7 @@ extension Camera {
         private var output = AVCapturePhotoOutput()
         
         var photoData: Data? = nil
-        var session = AVCaptureSession()
+        private(set) var session = AVCaptureSession()
         var previewLayer: AVCaptureVideoPreviewLayer!
         
         var uiImage: UIImage? {
@@ -79,6 +79,8 @@ extension Camera {
             
             guard let imageData = photo.fileDataRepresentation() else { return }
             photoData = imageData
+            
+            session.stopRunning()
         }
     }
 }

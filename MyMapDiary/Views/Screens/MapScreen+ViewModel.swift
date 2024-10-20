@@ -37,7 +37,7 @@ extension MapScreen {
            )
         }
         
-        func pinLoc(at loc: CLLocation) {
+        func pinLoc(at loc: CLLocation, data: Data) {
             
             let location = Location(
                 latitude: loc.coordinate.latitude,

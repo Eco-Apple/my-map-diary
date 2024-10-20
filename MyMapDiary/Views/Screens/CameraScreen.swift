@@ -18,7 +18,7 @@ struct CameraScreen: View {
     
     @State private var viewModel = ViewModel()
     
-    var pinLoc: ((CLLocation) -> Void)? = nil
+    var pinLoc: ((CLLocation, Data) -> Void)? = nil
     
     var body: some View {
         ZStack {
@@ -30,11 +30,13 @@ struct CameraScreen: View {
                 VStack {
                     Spacer()
                     HStack {
-                        Button("Cancel") {
-                            viewModel.camera.photoData = nil
+                        if !viewModel.camera.session.isRunning {
+                            Button("Cancel") {
+                                viewModel.camera.photoData = nil
+                            }
+                            Spacer()
+                            Button("Save", action: action)
                         }
-                        Spacer()
-                        Button("Save", action: action)
                     }
                 }
             } else {
@@ -45,26 +47,30 @@ struct CameraScreen: View {
                     Spacer()
                     
                     HStack {
+                        Spacer()
+                        Button("Cancel") {
+                            viewModel.camera.session.stopRunning()
+                            dismiss()
+                        }
                         Button(action: viewModel.camera.takePicture) {
                             Circle()
                                 .fill(Color.red)
                                 .frame(width: 70, height: 70)
                                 .shadow(radius: 5)
                         }
+                        Spacer()
                     }
                 }
             }
-        }
-        .onAppear {
-            viewModel.camera.checkAuthorization()
         }
     }
     
     func action() {
         guard let current = locManager.currLoc else { return }
         guard let pinLoc = pinLoc else { return }
+        guard let data = viewModel.camera.photoData else { return }
         
-        pinLoc(current)
+        pinLoc(current, data)
         
         dismiss()
     }

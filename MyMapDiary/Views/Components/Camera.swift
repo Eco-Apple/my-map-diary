@@ -14,6 +14,7 @@ struct Camera: UIViewRepresentable {
     
     func makeUIView(context: Context) -> UIView {
         let view = UIView(frame: UIScreen.main.bounds)
+        camera.checkAuthorization()
         camera.previewLayer = AVCaptureVideoPreviewLayer(session: camera.session)
         camera.previewLayer.frame = view.frame
         camera.previewLayer.videoGravity = .resizeAspectFill
