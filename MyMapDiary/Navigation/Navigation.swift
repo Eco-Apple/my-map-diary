@@ -32,7 +32,7 @@ struct Navigation<Content: View>: View {
     let content: () -> Content
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $router.path) {
             content()
                 .navigationDestination(for: NavigationRoute.self) { route in
                     router.destination(for: route)

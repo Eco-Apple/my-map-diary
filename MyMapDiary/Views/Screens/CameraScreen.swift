@@ -22,6 +22,10 @@ struct CameraScreen: View {
     
     var body: some View {
         ZStack {
+            Color
+                .black
+                .edgesIgnoringSafeArea(.all)
+            
             if let uiImage = viewModel.camera.uiImage {
                 Image(uiImage: uiImage)
                     .resizable()
@@ -40,8 +44,8 @@ struct CameraScreen: View {
                     }
                 }
             } else {
-                Camera(camera: viewModel.camera)
-                    .edgesIgnoringSafeArea(.all)
+//                Camera(camera: viewModel.camera)
+//                    .edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer()
@@ -52,12 +56,15 @@ struct CameraScreen: View {
                             viewModel.camera.session.stopRunning()
                             dismiss()
                         }
+                        Spacer()
                         Button(action: viewModel.camera.takePicture) {
                             Circle()
                                 .fill(Color.red)
                                 .frame(width: 70, height: 70)
                                 .shadow(radius: 5)
                         }
+                        Spacer()
+                        Spacer()
                         Spacer()
                     }
                 }

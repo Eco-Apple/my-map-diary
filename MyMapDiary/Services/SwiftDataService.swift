@@ -22,7 +22,12 @@ class SwiftDataService {
     
     func getLocations() -> [Location] {
         do {
-            let locations = try modelContext.fetch(FetchDescriptor<Location>())
+            var locations = try modelContext.fetch(FetchDescriptor<Location>())
+            
+            #if DEBUG
+            locations.append(.preview)
+            #endif
+            
             return locations
         } catch {
             fatalError(error.localizedDescription)

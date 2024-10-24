@@ -11,6 +11,6 @@ enum NavigationRoute: Hashable {
     case location(LocationRoute)
     
     enum LocationRoute: Hashable {
-        case detail
+        case detail(Location)
     }
 }

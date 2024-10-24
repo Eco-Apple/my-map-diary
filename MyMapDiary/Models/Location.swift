@@ -46,3 +46,7 @@ class Location: Codable {
         try container.encode(longitude, forKey: .longitude)
     }
 }
+
+extension Location {
+    static var preview = Location(latitude: 20.45798, longitude: 121.9941)
+}

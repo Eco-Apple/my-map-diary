@@ -21,8 +21,8 @@ class NavigationRouter: ObservableObject {
     
     private func handleLocationRoutes(_ route: NavigationRoute.LocationRoute) -> some View {
         switch route {
-        case .detail:
-            EmptyView()
+        case .detail(let location):
+            LocationDetailScreen(location: location)
         }
     }
 }

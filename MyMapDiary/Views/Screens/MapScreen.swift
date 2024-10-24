@@ -20,13 +20,8 @@ struct MapScreen: View {
                 if let initPos = viewModel.initPos {
                     Map(initialPosition: initPos) {
                         ForEach(viewModel.locations){ location in
-                            Annotation("Test", coordinate: location.coordinate) {
-                                Image(systemName: "star.circle")
-                                    .resizable()
-                                    .foregroundStyle(.red)
-                                    .frame(width: 44, height: 44)
-                                    .background(.white)
-                                    .clipShape(.circle)
+                            Annotation("", coordinate: location.coordinate) {
+                                LocationPin(location: location)   
                             }
                         }
                     }
