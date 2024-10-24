@@ -28,26 +28,39 @@ extension MapScreen {
             locations = dataService.getLocations()
         }
         
-        func setMap(loc: CLLocation) {
-            initPos = MapCameraPosition.region(
-              MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: loc.coordinate.latitude, longitude: loc.coordinate.longitude),
-                  span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
-              )
-           )
-        }
-        
-        func pinLoc(at loc: CLLocation, data: Data) {
+        func pinLoc(at loc: CLLocation, imgData: Data) {
             
             let location = Location(
                 latitude: loc.coordinate.latitude,
-                longitude: loc.coordinate.longitude
+                longitude: loc.coordinate.longitude,
+                imageData: imgData
             )
             
             dataService.addLocation(location)
             
             locations.append(location)
         }
+        
+        func setMap(loc: CLLocation) {
+            initPos = MapCameraPosition.region(
+              MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: loc.coordinate.latitude, longitude: loc.coordinate.longitude),
+                span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+              )
+           )
+        }
+        
+        func showCamera() {
+            isCameraPresented = true
+        }
+        
+        #if DEBUG
+        func debugDeleteAllLocation() {
+            dataService.debugDeleteAllLocations()
+            
+            locations = []
+        }
+        #endif
     }
     
 }

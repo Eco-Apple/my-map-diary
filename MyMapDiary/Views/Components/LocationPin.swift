@@ -17,10 +17,10 @@ struct LocationPin: View {
             navigate(.location(.detail(location)))
         } label: {
             VStack(spacing: 0) {
-                Image("swiz")
+                Image(uiImage: location.uiImage)
                     .resizable()
+                    .scaledToFill()
                     .frame(width: 60, height: 50)
-                    .scaledToFit()
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)

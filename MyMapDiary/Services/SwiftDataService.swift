@@ -16,17 +16,13 @@ class SwiftDataService {
     
     @MainActor
     private init() {
-        self.modelContainer = try! ModelContainer(for: Location.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+        self.modelContainer = try! ModelContainer(for: Location.self, configurations: ModelConfiguration(isStoredInMemoryOnly: false))
         self.modelContext = modelContainer.mainContext
     }
     
     func getLocations() -> [Location] {
         do {
-            var locations = try modelContext.fetch(FetchDescriptor<Location>())
-            
-            #if DEBUG
-            locations.append(.preview)
-            #endif
+            let locations = try modelContext.fetch(FetchDescriptor<Location>())
             
             return locations
         } catch {
@@ -42,4 +38,20 @@ class SwiftDataService {
            fatalError(error.localizedDescription)
         }
     }
+    
+    #if DEBUG
+    func debugDeleteAllLocations() {
+        do {
+            let allLoc = try modelContext.fetch(FetchDescriptor<Location>())
+            
+            for loc in allLoc {
+                modelContext.delete(loc)
+            }
+            
+            try modelContext.save()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+    #endif
 }

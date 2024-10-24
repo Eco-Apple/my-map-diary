@@ -44,8 +44,8 @@ struct CameraScreen: View {
                     }
                 }
             } else {
-//                Camera(camera: viewModel.camera)
-//                    .edgesIgnoringSafeArea(.all)
+                Camera(camera: viewModel.camera)
+                    .edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer()

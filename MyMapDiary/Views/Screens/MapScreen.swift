@@ -26,23 +26,46 @@ struct MapScreen: View {
                         }
                     }
                     .toolbar(.hidden)
-                    .mapStyle(.hybrid)
+                    .mapStyle(.standard)
                 }
+                
+                #if DEBUG
+                VStack {
+                    HStack {
+                        Button(action: viewModel.debugDeleteAllLocation){
+                            Image(systemName: "trash")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25, height: 25)
+                                .padding()
+                                .background(.blue)
+                                .foregroundStyle(.white)
+                                .clipShape(Circle())
+                                .shadow(color: .black, radius: 4, x: 0, y: 2)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(20)
+                    
+                    Spacer()
+                }
+                #endif
                 
                 VStack {
                     Spacer()
                     
                     HStack {
-                        Button(action: action) {
+                        Button(action: viewModel.showCamera) {
                             Image(systemName: "camera")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40, height: 40)
                                 .padding()
                                 .background(Color.blue)
-                                .foregroundColor(.white)
+                                .foregroundStyle(.white)
                                 .clipShape(Circle())
-                                .shadow(color: .gray, radius: 4, x: 0, y: 2)
+                                .shadow(color: .black, radius: 4, x: 0, y: 2)
                         }
                         .frame(width: 70, height: 70)
                         .padding()
@@ -58,10 +81,6 @@ struct MapScreen: View {
                 CameraScreen(pinLoc: viewModel.pinLoc)
             }
         }
-    }
-    
-    func action() {
-        viewModel.isCameraPresented = true
     }
 }
 
