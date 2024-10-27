@@ -44,8 +44,11 @@ struct CameraScreen: View {
                     }
                 }
             } else {
+                
+                #if !targetEnvironment(simulator)
                 Camera(camera: viewModel.camera)
                     .edgesIgnoringSafeArea(.all)
+                #endif
                 
                 VStack {
                     Spacer()

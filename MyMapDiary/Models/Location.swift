@@ -13,7 +13,9 @@ import SwiftData
 class Location: Codable, Identifiable {
     
     enum CodingKeys: String, CodingKey {
-        case id
+        case title
+        case message
+        
         case latitude
         case longitude
         case imageData
@@ -22,7 +24,9 @@ class Location: Codable, Identifiable {
         case updatedAt
     }
     
-    private(set) var id: UUID
+    var title: String = ""
+    var message: String = ""
+    
     private(set) var latitude: Double
     private(set) var longitude: Double
     @Attribute(.externalStorage) private var imageData: Data
@@ -39,7 +43,6 @@ class Location: Codable, Identifiable {
     }
     
     init(latitude: Double, longitude: Double, imageData: Data) {
-        self.id = UUID()
         self.latitude = latitude
         self.longitude = longitude
         self.imageData = imageData
@@ -49,7 +52,8 @@ class Location: Codable, Identifiable {
     
     required init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(UUID.self, forKey: .id)
+        title = try container.decode(String.self, forKey: .title)
+        message = try container.decode(String.self, forKey: .message)
         latitude = try container.decode(Double.self, forKey: .latitude)
         longitude = try container.decode(Double.self, forKey: .longitude)
         imageData = try container.decode(Data.self, forKey: .imageData)
@@ -59,7 +63,8 @@ class Location: Codable, Identifiable {
     
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
+        try container.encode(title, forKey: .title)
+        try container.encode(message, forKey: .message)
         try container.encode(latitude, forKey: .latitude)
         try container.encode(longitude, forKey: .longitude)
         try container.encode(imageData, forKey: .imageData)

@@ -67,8 +67,14 @@ extension Camera {
         }
         
         func takePicture() {
+            #if !targetEnvironment(simulator)
             let settings = AVCapturePhotoSettings()
             output.capturePhoto(with: settings, delegate: self)
+            #else
+            let uiImage = UIImage(named: "swiz")!
+            let data = uiImage.jpegData(compressionQuality: 80)!
+            photoData = data
+            #endif
         }
         
         func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {

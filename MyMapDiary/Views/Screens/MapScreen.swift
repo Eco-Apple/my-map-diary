@@ -26,7 +26,7 @@ struct MapScreen: View {
                         }
                     }
                     .toolbar(.hidden)
-                    .mapStyle(.standard)
+                    .mapStyle(.hybrid)
                 }
                 
                 #if DEBUG
@@ -62,7 +62,7 @@ struct MapScreen: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40, height: 40)
                                 .padding()
-                                .background(Color.blue)
+                                .background(.blue)
                                 .foregroundStyle(.white)
                                 .clipShape(Circle())
                                 .shadow(color: .black, radius: 4, x: 0, y: 2)
