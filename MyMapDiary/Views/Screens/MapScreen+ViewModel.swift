@@ -28,6 +28,10 @@ extension MapScreen {
             locations = dataService.getLocations()
         }
         
+        func fetchLocations() {
+            locations = dataService.getLocations()
+        }
+        
         func pinLoc(at loc: CLLocation, imgData: Data) {
             
             let location = Location(

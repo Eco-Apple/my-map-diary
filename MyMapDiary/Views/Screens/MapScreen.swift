@@ -38,7 +38,7 @@ struct MapScreen: View {
                                 .scaledToFit()
                                 .frame(width: 25, height: 25)
                                 .padding()
-                                .background(.blue)
+                                .background(.mapButtonBg)
                                 .foregroundStyle(.white)
                                 .clipShape(Circle())
                                 .shadow(color: .black, radius: 4, x: 0, y: 2)
@@ -62,7 +62,7 @@ struct MapScreen: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40, height: 40)
                                 .padding()
-                                .background(.blue)
+                                .background(.mapButtonBg)
                                 .foregroundStyle(.white)
                                 .clipShape(Circle())
                                 .shadow(color: .black, radius: 4, x: 0, y: 2)
@@ -80,6 +80,9 @@ struct MapScreen: View {
             .fullScreenCover(isPresented: $viewModel.isCameraPresented) {
                 CameraScreen(pinLoc: viewModel.pinLoc)
             }
+        }
+        .onAppear {
+            viewModel.fetchLocations()
         }
     }
 }

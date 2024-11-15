@@ -9,98 +9,88 @@ import SwiftUI
 import Combine
 
 struct LocationDetailScreen: View {
-    @Environment(\.dismiss) var dismiss
-    @State var location: Location
-    @State private var isKeyboardVisible = false
+    @Environment(\.dismiss) private var dismiss
     
-    let defaultHeight = 300.0
+    @State private var viewModel: ViewModel
+    
+    let bottomDefaultHeight: CGFloat = 280.0
+    
+    init(location: Location) {
+        _viewModel = State(initialValue: ViewModel(dataService: .shared, location: location))
+    }
     
     var body: some View {
         ZStack {
             VStack {
-                Image(uiImage: location.uiImage)
-                    .resizable()
-                    .scaledToFill()
+                GeometryReader { proxy in
+                    Image(uiImage: viewModel.location.uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: proxy.size.width)
+                }
+                
                 Spacer()
-                    .frame(height: defaultHeight + ( isKeyboardVisible ? 150 : 0))
+                    .frame(height: bottomDefaultHeight)
+                
             }
             .ignoresSafeArea(.all)
             
-            VStack(spacing: .zero) {
+            VStack {
                 Spacer()
-                VStack {
-                    Spacer()
-                    Form {
-                        
-                        Section {
-                            TextField("Title", text: $location.title)
-                        }
-                        
-                        Section {
-                            TextEditor(text: $location.message)
-                                .placeHolder("Share your thoughts or memories...", text: $location.message)
-                                .frame(height: 150)
-                        }
-                    }
+                
+                Form {
+                    TextField("Title", text: $viewModel.location.title)
                     
-                    .listSectionSpacing(.compact)
-                    .scrollDisabled(true)
-                    .offset(y: -40)
+                    TextEditor(text: $viewModel.location.message)
+                        .placeHolder("Share your thoughts or memories...", text: $viewModel.location.message)
+                        .frame(height: 150)
                 }
-                .frame(height: defaultHeight + ( isKeyboardVisible ? 150 : 0))
-                .padding(.top, 55)
-                .background(Color(.systemGroupedBackground))
+                .frame(height: bottomDefaultHeight)
             }
-            .frame(width: UIScreen.main.bounds.width)
+            .scrollBounceBehavior(.basedOnSize)
             
             VStack {
                 Spacer()
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Label("Back", systemImage: "chevron.backward")
+                VStack {
+                    HStack {
+                        Button {
+                            dismiss()
+                        } label: {
+                            Label("Back", systemImage: "chevron.backward")
+                        }
+                        
+                        Spacer()
+                        
+                        Button("", systemImage: "trash") {
+                            viewModel.isDeletePresented = true
+                        }
+                        .alert(isPresented: $viewModel.isDeletePresented) {
+                            Alert(
+                                title: Text("Are you sure you want to delete this?"),
+                                message: Text("You cannot undo this action once done."),
+                                primaryButton: .destructive(Text("Delete")) {
+                                        viewModel.delLoc()
+                                        dismiss()
+                                },
+                                secondaryButton: .cancel()
+                            )
+
+                        }
                     }
-                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 20)
+                    .padding(.horizontal, 20)
+                    .background(Color(.systemGroupedBackground))
                     
                     Spacer()
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "trash")
-                    }
-                    .padding()
                 }
-                .frame(width: UIScreen.main.bounds.width)
-                .background(.clear)
-                
-                Spacer()
-                    .frame(height: defaultHeight + ( isKeyboardVisible ? 150 : 0))
+                .frame(height: bottomDefaultHeight + 30)
             }
-            .frame(width: UIScreen.main.bounds.width)
         }
-        
-        .background(Color(.systemGroupedBackground))
         .navigationBarHidden(true)
-        .onReceive(Publishers.keyboardVisible) { isVisible in
-            isKeyboardVisible = isVisible
-        }
     }
 }
 
-
-// Keyboard visibility publisher
-extension Publishers {
-    static var keyboardVisible: AnyPublisher<Bool, Never> {
-        let keyboardWillShow = NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
-            .map { _ in true }
-        let keyboardWillHide = NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
-            .map { _ in false }
-
-        return MergeMany(keyboardWillShow, keyboardWillHide)
-            .eraseToAnyPublisher()
-    }
-}
 
 #Preview {
     LocationDetailScreen(location: .preview)
