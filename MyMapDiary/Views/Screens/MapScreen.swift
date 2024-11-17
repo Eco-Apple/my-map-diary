@@ -17,6 +17,10 @@ struct MapScreen: View {
     var body: some View {
         MapReader { proxy in
             ZStack {
+                #if targetEnvironment(simulator)
+                Map()
+                    .mapStyle(.hybrid)
+                #else
                 if let initPos = viewModel.initPos {
                     Map(initialPosition: initPos) {
                         ForEach(viewModel.locations){ location in
@@ -28,20 +32,57 @@ struct MapScreen: View {
                     .toolbar(.hidden)
                     .mapStyle(.hybrid)
                 }
+                #endif
+                
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.black.opacity(0.9), Color.clear, Color.black.opacity(0.9)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .edgesIgnoringSafeArea(.all)
+                .allowsHitTesting(false)
                 
                 #if DEBUG
                 VStack {
                     HStack {
                         Button(action: viewModel.debugDeleteAllLocation){
-                            Image(systemName: "trash")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 25, height: 25)
-                                .padding()
-                                .background(.mapButtonBg)
-                                .foregroundStyle(.white)
-                                .clipShape(Circle())
-                                .shadow(color: .black, radius: 4, x: 0, y: 2)
+                            ZStack {
+                                Color
+                                    .glassBg
+                                    .frame(width: 63, height: 63)
+                                    .blur(radius: 35)
+                                    .opacity(0.30)
+                                    .clipShape(Circle())
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 55)
+                                            .stroke(
+                                                LinearGradient(
+                                                    gradient: Gradient(colors: [Color.white, Color.white.opacity(0)]),
+                                                    startPoint: .topLeading,
+                                                    endPoint: .bottomTrailing
+                                                ),
+                                                lineWidth: 1
+                                            )
+                                            .opacity(0.5)
+                                    )
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 55)
+                                            .stroke(
+                                                LinearGradient(
+                                                    gradient: Gradient(colors: [Color.white.opacity(0), Color.white]),
+                                                    startPoint: .topLeading,
+                                                    endPoint: .bottomTrailing
+                                                ),
+                                                lineWidth: 1
+                                            )
+                                            .opacity(0.20)
+                                    )
+                                
+                                
+                                Image(systemName: "trash")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 25))
+                            }
                         }
                         
                         Spacer()
@@ -52,23 +93,50 @@ struct MapScreen: View {
                 }
                 #endif
                 
+                
                 VStack {
                     Spacer()
                     
                     HStack {
                         Button(action: viewModel.showCamera) {
-                            Image(systemName: "camera")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                                .padding()
-                                .background(.mapButtonBg)
-                                .foregroundStyle(.white)
-                                .clipShape(Circle())
-                                .shadow(color: .black, radius: 4, x: 0, y: 2)
+                            ZStack {
+                                Color
+                                    .glassBg
+                                    .frame(width: 63, height: 63)
+                                    .blur(radius: 35)
+                                    .opacity(0.30)
+                                    .clipShape(Circle())
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 55)
+                                            .stroke(
+                                                LinearGradient(
+                                                    gradient: Gradient(colors: [Color.white, Color.white.opacity(0)]),
+                                                    startPoint: .topLeading,
+                                                    endPoint: .bottomTrailing
+                                                ),
+                                                lineWidth: 1
+                                            )
+                                            .opacity(0.5)
+                                    )
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 55)
+                                            .stroke(
+                                                LinearGradient(
+                                                    gradient: Gradient(colors: [Color.white.opacity(0), Color.white]),
+                                                    startPoint: .topLeading,
+                                                    endPoint: .bottomTrailing
+                                                ),
+                                                lineWidth: 1
+                                            )
+                                            .opacity(0.20)
+                                    )
+                                
+                                
+                                Image(systemName: "camera")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 25))
+                            }
                         }
-                        .frame(width: 70, height: 70)
-                        .padding()
                     }
                 }
             }
@@ -88,5 +156,8 @@ struct MapScreen: View {
 }
 
 #Preview {
+    let locManager = LocationManager()
+    
     MapScreen()
+        .environment(locManager)
 }
