@@ -80,18 +80,18 @@ struct CameraScreen: View {
                             ZStack {
                                 Color
                                     .glassBg
-                                    .frame(width: 43, height: 43)
+                                    .frame(width: 33, height: 33)
                                     .blur(radius: 40)
                                     .opacity(0.90)
                                     .clipShape(Circle())
                                 
                                 Image(systemName: "xmark")
                                     .foregroundColor(.white)
-                                    .font(.system(size: 20))
+                                    .font(.system(size: 15))
                             }
                         }
                     }
-                    .padding(.trailing, 30)
+                    .padding(.trailing, 20)
                     
                     Spacer()
                 }
@@ -136,7 +136,7 @@ struct CameraScreen: View {
                         HStack {
                             Spacer()
                             
-                            Button(action: viewModel.camera.takePicture) {
+                            Button(action: viewModel.toggleFlash) {
                                 ZStack {
                                     Color
                                         .glassBg
@@ -145,7 +145,7 @@ struct CameraScreen: View {
                                         .opacity(0.90)
                                         .clipShape(Circle())
                                     
-                                    Image(systemName: "bolt.fill")
+                                    Image(systemName: viewModel.flash ? "bolt.fill" : "bolt.slash.fill")
                                         .foregroundColor(.white)
                                         .font(.system(size: 25))
                                 }
@@ -159,7 +159,7 @@ struct CameraScreen: View {
                             
                             Spacer()
                             
-                            Button(action: viewModel.camera.takePicture) {
+                            Button(action: viewModel.takePicture) {
                                 ZStack {
                                     Circle()
                                         .stroke(Color.white, lineWidth: 5)
@@ -179,7 +179,7 @@ struct CameraScreen: View {
                             Spacer()
                             
                             
-                            Button(action: viewModel.camera.takePicture) {
+                            Button(action: viewModel.toggleCamera) {
                                 ZStack {
                                     Color
                                         .glassBg
@@ -200,51 +200,6 @@ struct CameraScreen: View {
                         .padding(.bottom)
                     }
                 }
-                
-//                NavigationStack {
-//                    VStack {
-//                        Spacer()
-//                        
-//                        HStack {
-//                            Spacer()
-//                            
-//                            HStack {
-//                                Button(action: viewModel.camera.takePicture) {
-//                                    Circle()
-//                                        .fill(Color.red)
-//                                        .frame(width: 70, height: 70)
-//                                        .shadow(radius: 5)
-//                                }
-//                            }
-//                            .background(
-//                                .white
-//                            )
-//                            
-//                            Spacer()
-//                        }
-//                        
-//                    }
-//                    .toolbar {
-//                        ToolbarItem(placement: .cancellationAction) {
-//                            Button {
-//                                viewModel.camera.session.stopRunning()
-//                                dismiss()
-//                            } label: {
-//                                Label("Cancel", systemImage: "chevron.backward")
-//                            }
-//                        }
-//                    }
-//                    #if DEBUG
-//                    .background(
-//                        Image(.swiz)
-//                            .resizable()
-//                            .scaledToFill()
-//                            .ignoresSafeArea()
-//                    )
-//                    #else
-//                    .background(.black)
-//                    #endif
-//                }
             }
         }
     }

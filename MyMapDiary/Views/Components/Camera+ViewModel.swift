@@ -49,6 +49,10 @@ extension Camera {
                 guard let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: self.cameraPosition) else { return }
                 
                 do {
+                    for input in self.session.inputs {
+                        self.session.removeInput(input)
+                    }
+                    
                     let input = try AVCaptureDeviceInput(device: camera)
                     if self.session.canAddInput(input) {
                         self.session.addInput(input)
@@ -66,15 +70,37 @@ extension Camera {
             }
         }
         
-        func takePicture() {
+        func takePicture(isFlashOn: Bool) {
             #if !targetEnvironment(simulator)
-            let settings = AVCapturePhotoSettings()
-            output.capturePhoto(with: settings, delegate: self)
+            guard let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: self.cameraPosition) else { return }
+
+            do {
+                try camera.lockForConfiguration()
+                                
+                camera.unlockForConfiguration()
+
+                let settings = AVCapturePhotoSettings()
+                
+                if camera.isFlashAvailable && isFlashOn {
+                    settings.flashMode = .on
+                }
+                
+                
+                output.capturePhoto(with: settings, delegate: self)
+            } catch {
+                print(error.localizedDescription)
+            }
             #else
             let uiImage = UIImage(named: "swiz")!
             let data = uiImage.jpegData(compressionQuality: 80)!
             photoData = data
             #endif
+        }
+        
+        func position(_ position: AVCaptureDevice.Position) {
+            cameraPosition = position
+            
+            setupSession()
         }
         
         func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
