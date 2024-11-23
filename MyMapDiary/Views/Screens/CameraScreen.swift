@@ -27,25 +27,79 @@ struct CameraScreen: View {
                 .edgesIgnoringSafeArea(.all)
             
             if let uiImage = viewModel.camera.uiImage {
-                NavigationStack {
+                
+    
+                #if !targetEnvironment(simulator)
+                GeometryReader { proxy in
                     Image(uiImage: uiImage)
                         .resizable()
-                        .scaledToFit()
-                        .toolbar {
-                            ToolbarItem(placement: .cancellationAction) {
-                                Button(action: {
-                                    viewModel.camera.photoData = nil
-                                }) {
-                                    Label("Cancel", systemImage: "chevron.backward")
-                                }
-                            }
-                            
-                            ToolbarItem(placement: .confirmationAction) {
-                                Button("Save", action: action)
+                        .scaledToFill()
+                        .frame(width: proxy.size.width)
+                        .ignoresSafeArea()
+                }
+                #endif
+
+                #if targetEnvironment(simulator)
+                GeometryReader { proxy in
+                    Image(.camera)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: proxy.size.width)
+                        .ignoresSafeArea()
+                }
+                #endif
+                
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.black.opacity(0.9), Color.clear, Color.black.opacity(0.9)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .edgesIgnoringSafeArea(.all)
+                .allowsHitTesting(false)
+                
+                VStack {
+                    HStack(alignment: .center) {
+                        Button {
+                            viewModel.camera.photoData = nil
+                        } label: {
+                            ZStack {
+                                Color
+                                    .glassBg
+                                    .frame(width: 33, height: 33)
+                                    .blur(radius: 40)
+                                    .opacity(0.90)
+                                    .clipShape(Circle())
+                                
+                                Image(systemName: "chevron.backward")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 15))
                             }
                         }
+                        
+                        Spacer()
+                        
+                        Button {
+                            save()
+                        } label: {
+                            ZStack {
+                                Color
+                                    .glassBg
+                                    .frame(width: 90, height: 33)
+                                    .blur(radius: 40)
+                                    .opacity(0.70)
+                                    .cornerRadius(16)
+                                Text("Save")
+                                    .foregroundStyle(.white)
+                            }
+                        }
+                        
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+                    .padding(.horizontal, 20)
+                    
+                    Spacer()
                 }
-            } else {
+                            } else {
                 
                 #if !targetEnvironment(simulator)
                 Camera(camera: viewModel.camera)
@@ -204,7 +258,7 @@ struct CameraScreen: View {
         }
     }
     
-    func action() {
+    func save() {
         guard let current = locManager.currLoc else { return }
         guard let pinLoc = pinLoc else { return }
         guard let data = viewModel.camera.photoData else { return }
