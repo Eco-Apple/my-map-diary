@@ -15,7 +15,7 @@ import MapKit
 extension MapScreen {
     @Observable
     class ViewModel {
-        private(set) var initPos: MapCameraPosition? = nil
+        var initPos: MapCameraPosition? = nil
         var isCameraPresented: Bool = false
         
         private(set) var locations: [Location] = []
@@ -46,12 +46,14 @@ extension MapScreen {
         }
         
         func setMap(loc: CLLocation) {
-            initPos = MapCameraPosition.region(
-              MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: loc.coordinate.latitude, longitude: loc.coordinate.longitude),
-                span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-              )
-           )
+            initPos = .camera(
+                MapCamera(
+                    centerCoordinate: CLLocationCoordinate2D(latitude: loc.coordinate.latitude, longitude: loc.coordinate.longitude),
+                    distance: 500,
+                    heading: 0,
+                    pitch: 45
+                )
+            )
         }
         
         func showCamera() {

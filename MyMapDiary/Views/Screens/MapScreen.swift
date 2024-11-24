@@ -16,6 +16,7 @@ struct MapScreen: View {
     
     var body: some View {
         MapReader { proxy in
+            
             ZStack {
                 #if targetEnvironment(simulator)
                 Map()
@@ -28,9 +29,11 @@ struct MapScreen: View {
                                 LocationPin(location: location)   
                             }
                         }
+                        
+                        UserAnnotation()
                     }
                     .toolbar(.hidden)
-                    .mapStyle(.hybrid)
+                    .mapStyle(.standard(elevation: .realistic))
                 }
                 #endif
                 
