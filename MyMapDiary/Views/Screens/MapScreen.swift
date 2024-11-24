@@ -35,7 +35,7 @@ struct MapScreen: View {
                 #endif
                 
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.black.opacity(0.9), Color.clear, Color.black.opacity(0.9)]),
+                    gradient: Gradient(colors: [Color.black.opacity(0), Color.clear, Color.black.opacity(0.9)]),
                     startPoint: .top,
                     endPoint: .bottom
                 )

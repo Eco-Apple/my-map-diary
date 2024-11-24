@@ -12,5 +12,6 @@ enum NavigationRoute: Hashable {
     
     enum LocationRoute: Hashable {
         case detail(Location)
+        case imgFullScreen(Location)
     }
 }

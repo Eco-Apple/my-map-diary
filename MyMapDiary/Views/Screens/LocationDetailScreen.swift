@@ -10,6 +10,7 @@ import Combine
 
 struct LocationDetailScreen: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.navigate) private var navigate
     
     @State private var viewModel: ViewModel
     
@@ -34,6 +35,34 @@ struct LocationDetailScreen: View {
                 
             }
             .ignoresSafeArea(.all)
+            
+            LinearGradient(
+                gradient: Gradient(colors: [Color.black.opacity(0.9), Color.clear, Color.black.opacity(0.9)]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .edgesIgnoringSafeArea(.all)
+            .allowsHitTesting(false)
+            
+            VStack {
+                HStack(alignment: .center){
+                    Spacer()
+                    
+                    TransparentIconButton(
+                        glassBgParams: GlassBgParams(radius: 25, opacity: 0.9)
+                    ){
+                        navigate(.location(.imgFullScreen(viewModel.location)))
+                    } label: {
+                        Image(systemName: "arrow.down.left.and.arrow.up.right")
+                            .foregroundColor(.white)
+                            .font(.system(size: 15))
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: 50)
+                .padding(.horizontal, 20)
+                
+                Spacer()
+            }
             
             VStack {
                 Spacer()

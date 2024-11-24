@@ -28,7 +28,6 @@ struct CameraScreen: View {
             
             if let uiImage = viewModel.camera.uiImage {
                 
-    
                 #if !targetEnvironment(simulator)
                 GeometryReader { proxy in
                     Image(uiImage: uiImage)
@@ -50,7 +49,7 @@ struct CameraScreen: View {
                 #endif
                 
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.black.opacity(0.9), Color.clear, Color.black.opacity(0.9)]),
+                    gradient: Gradient(colors: [Color.black.opacity(0.9), Color.clear, Color.black.opacity(0)]),
                     startPoint: .top,
                     endPoint: .bottom
                 )
@@ -58,48 +57,40 @@ struct CameraScreen: View {
                 .allowsHitTesting(false)
                 
                 VStack {
-                    HStack(alignment: .center) {
-                        Button {
+                    HStack(alignment: .center){
+                        
+                        TransparentIconButton(
+                            glassBgParams: GlassBgParams(radius: 25, opacity: 0.9)
+                        ){
                             viewModel.camera.photoData = nil
                         } label: {
-                            ZStack {
-                                Color
-                                    .glassBg
-                                    .frame(width: 33, height: 33)
-                                    .blur(radius: 40)
-                                    .opacity(0.90)
-                                    .clipShape(Circle())
-                                
-                                Image(systemName: "chevron.backward")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 15))
-                            }
+                            Image(systemName: "chevron.backward")
+                                .foregroundColor(.white)
+                                .font(.system(size: 15))
                         }
                         
                         Spacer()
-                        
-                        Button {
+//
+                        TransparentTextButton(
+                            glassBgParams: GlassBgParams(
+                                size: CGSize(width: 90, height: 33),
+                                radius: 40,
+                                opacity: 0.70
+                            ),
+                            radius: 16
+                        ){
                             save()
                         } label: {
-                            ZStack {
-                                Color
-                                    .glassBg
-                                    .frame(width: 90, height: 33)
-                                    .blur(radius: 40)
-                                    .opacity(0.70)
-                                    .cornerRadius(16)
-                                Text("Save")
-                                    .foregroundStyle(.white)
-                            }
+                            Text("Save")
+                                .foregroundStyle(.white)
                         }
-                        
                     }
                     .frame(maxWidth: .infinity, maxHeight: 50)
                     .padding(.horizontal, 20)
                     
                     Spacer()
                 }
-                            } else {
+            } else {
                 
                 #if !targetEnvironment(simulator)
                 Camera(camera: viewModel.camera)
@@ -127,22 +118,14 @@ struct CameraScreen: View {
                 VStack {
                     HStack {
                         Spacer()
-                        
-                        Button {
+                        TransparentIconButton(
+                            glassBgParams: GlassBgParams(radius: 25, opacity: 0.9)
+                        ){
                             dismiss()
                         } label: {
-                            ZStack {
-                                Color
-                                    .glassBg
-                                    .frame(width: 33, height: 33)
-                                    .blur(radius: 40)
-                                    .opacity(0.90)
-                                    .clipShape(Circle())
-                                
-                                Image(systemName: "xmark")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 15))
-                            }
+                            Image(systemName: "xmark")
+                                .foregroundColor(.white)
+                                .font(.system(size: 15))
                         }
                     }
                     .padding(.trailing, 20)
@@ -190,19 +173,15 @@ struct CameraScreen: View {
                         HStack {
                             Spacer()
                             
-                            Button(action: viewModel.toggleFlash) {
-                                ZStack {
-                                    Color
-                                        .glassBg
-                                        .frame(width: 63, height: 63)
-                                        .blur(radius: 40)
-                                        .opacity(0.90)
-                                        .clipShape(Circle())
-                                    
-                                    Image(systemName: viewModel.flash ? "bolt.fill" : "bolt.slash.fill")
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 25))
-                                }
+                            TransparentIconButton(
+                                glassBgParams: GlassBgParams(
+                                    size: CGSize(width: 62, height: 63)
+                                ),
+                                action: viewModel.toggleFlash
+                            ){
+                                Image(systemName: viewModel.flash ? "bolt.fill" : "bolt.slash.fill")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 25))
                             }
                             
                             Spacer()
@@ -232,20 +211,15 @@ struct CameraScreen: View {
                             Spacer()
                             Spacer()
                             
-                            
-                            Button(action: viewModel.toggleCamera) {
-                                ZStack {
-                                    Color
-                                        .glassBg
-                                        .frame(width: 63, height: 63)
-                                        .blur(radius: 40)
-                                        .opacity(0.90)
-                                        .clipShape(Circle())
-                                    
-                                    Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90.camera.fill")
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 25))
-                                }
+                            TransparentIconButton(
+                                glassBgParams: GlassBgParams(
+                                    size: CGSize(width: 62, height: 63)
+                                ),
+                                action: viewModel.toggleCamera
+                            ){
+                                Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90.camera.fill")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 25))
                             }
     
                             Spacer()
@@ -258,7 +232,7 @@ struct CameraScreen: View {
         }
     }
     
-    func save() {
+    func save(){
         guard let current = locManager.currLoc else { return }
         guard let pinLoc = pinLoc else { return }
         guard let data = viewModel.camera.photoData else { return }

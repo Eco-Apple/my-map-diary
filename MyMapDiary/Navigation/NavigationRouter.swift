@@ -19,10 +19,13 @@ class NavigationRouter: ObservableObject {
         }
     }
     
+    @ViewBuilder
     private func handleLocationRoutes(_ route: NavigationRoute.LocationRoute) -> some View {
         switch route {
         case .detail(let location):
             LocationDetailScreen(location: location)
+        case .imgFullScreen(let location):
+            ImageFullScreen(location: location)
         }
     }
 }
