@@ -70,7 +70,7 @@ struct CameraScreen: View {
                         }
                         
                         Spacer()
-//
+                        
                         TransparentTextButton(
                             glassBgParams: GlassBgParams(
                                 size: CGSize(width: 90, height: 33),
