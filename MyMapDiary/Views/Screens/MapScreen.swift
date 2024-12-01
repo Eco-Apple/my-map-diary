@@ -33,7 +33,7 @@ struct MapScreen: View {
                         UserAnnotation()
                     }
                     .toolbar(.hidden)
-                    .mapStyle(.standard(elevation: .realistic))
+                    .mapStyle(.hybrid)
                 }
                 #endif
                 
