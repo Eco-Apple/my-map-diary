@@ -263,7 +263,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"MyMapDiary/Preview Content\"";
 				DEVELOPMENT_TEAM = 37Z7CK9SP4;
 				ENABLE_PREVIEWS = YES;
@@ -271,8 +271,8 @@
 				INFOPLIST_FILE = MyMapDiary/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "My Map Diary";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to capture photos.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app needs access to your location to provide location-based services.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app need access to your camera to take photos that you can pin to map locations and save your memories.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app need access to your location to tag your photos and display your current position on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -297,7 +297,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"MyMapDiary/Preview Content\"";
 				DEVELOPMENT_TEAM = 37Z7CK9SP4;
 				ENABLE_PREVIEWS = YES;
@@ -305,8 +305,8 @@
 				INFOPLIST_FILE = MyMapDiary/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "My Map Diary";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to capture photos.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app needs access to your location to provide location-based services.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app need access to your camera to take photos that you can pin to map locations and save your memories.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app need access to your location to tag your photos and display your current position on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
