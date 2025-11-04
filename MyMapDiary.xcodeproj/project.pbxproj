@@ -6,8 +6,41 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		20AA7B892EBA302900F99017 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AA7B882EBA302900F99017 /* WidgetKit.framework */; };
+		20AA7B8B2EBA302900F99017 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AA7B8A2EBA302900F99017 /* SwiftUI.framework */; };
+		20AA7B9A2EBA302B00F99017 /* MyMapDiaryWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 20AA7B862EBA302900F99017 /* MyMapDiaryWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		20AA7B982EBA302B00F99017 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2078390B2CC14B5100225175 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20AA7B852EBA302900F99017;
+			remoteInfo = MyMapDiaryWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		20AA7B9B2EBA302B00F99017 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				20AA7B9A2EBA302B00F99017 /* MyMapDiaryWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		207839132CC14B5100225175 /* MyMapDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMapDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		20AA7B862EBA302900F99017 /* MyMapDiaryWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyMapDiaryWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		20AA7B882EBA302900F99017 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		20AA7B8A2EBA302900F99017 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -17,6 +50,13 @@
 				Info.plist,
 			);
 			target = 207839122CC14B5100225175 /* MyMapDiary */;
+		};
+		20AA7B9F2EBA302B00F99017 /* Exceptions for "MyMapDiaryWidget" folder in "MyMapDiaryWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 20AA7B852EBA302900F99017 /* MyMapDiaryWidgetExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -29,6 +69,14 @@
 			path = MyMapDiary;
 			sourceTree = "<group>";
 		};
+		20AA7B8C2EBA302900F99017 /* MyMapDiaryWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				20AA7B9F2EBA302B00F99017 /* Exceptions for "MyMapDiaryWidget" folder in "MyMapDiaryWidgetExtension" target */,
+			);
+			path = MyMapDiaryWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +87,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20AA7B832EBA302900F99017 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20AA7B8B2EBA302900F99017 /* SwiftUI.framework in Frameworks */,
+				20AA7B892EBA302900F99017 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -46,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				207839152CC14B5100225175 /* MyMapDiary */,
+				20AA7B8C2EBA302900F99017 /* MyMapDiaryWidget */,
+				20AA7B872EBA302900F99017 /* Frameworks */,
 				207839142CC14B5100225175 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,8 +113,18 @@
 			isa = PBXGroup;
 			children = (
 				207839132CC14B5100225175 /* MyMapDiary.app */,
+				20AA7B862EBA302900F99017 /* MyMapDiaryWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		20AA7B872EBA302900F99017 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20AA7B882EBA302900F99017 /* WidgetKit.framework */,
+				20AA7B8A2EBA302900F99017 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -68,10 +137,12 @@
 				2078390F2CC14B5100225175 /* Sources */,
 				207839102CC14B5100225175 /* Frameworks */,
 				207839112CC14B5100225175 /* Resources */,
+				20AA7B9B2EBA302B00F99017 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				20AA7B992EBA302B00F99017 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				207839152CC14B5100225175 /* MyMapDiary */,
@@ -83,6 +154,28 @@
 			productReference = 207839132CC14B5100225175 /* MyMapDiary.app */;
 			productType = "com.apple.product-type.application";
 		};
+		20AA7B852EBA302900F99017 /* MyMapDiaryWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20AA7B9E2EBA302B00F99017 /* Build configuration list for PBXNativeTarget "MyMapDiaryWidgetExtension" */;
+			buildPhases = (
+				20AA7B822EBA302900F99017 /* Sources */,
+				20AA7B832EBA302900F99017 /* Frameworks */,
+				20AA7B842EBA302900F99017 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				20AA7B8C2EBA302900F99017 /* MyMapDiaryWidget */,
+			);
+			name = MyMapDiaryWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = MyMapDiaryWidgetExtension;
+			productReference = 20AA7B862EBA302900F99017 /* MyMapDiaryWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -90,11 +183,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					207839122CC14B5100225175 = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					20AA7B852EBA302900F99017 = {
+						CreatedOnToolsVersion = 16.4;
 					};
 				};
 			};
@@ -113,12 +209,20 @@
 			projectRoot = "";
 			targets = (
 				207839122CC14B5100225175 /* MyMapDiary */,
+				20AA7B852EBA302900F99017 /* MyMapDiaryWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		207839112CC14B5100225175 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20AA7B842EBA302900F99017 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -135,7 +239,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20AA7B822EBA302900F99017 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		20AA7B992EBA302B00F99017 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20AA7B852EBA302900F99017 /* MyMapDiaryWidgetExtension */;
+			targetProxy = 20AA7B982EBA302B00F99017 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		2078391F2CC14B5100225175 /* Debug */ = {
@@ -325,6 +444,62 @@
 			};
 			name = Release;
 		};
+		20AA7B9C2EBA302B00F99017 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 37Z7CK9SP4;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyMapDiaryWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyMapDiaryWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecovillaraza.MyMapDiary.debug.MyMapDiaryWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		20AA7B9D2EBA302B00F99017 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 37Z7CK9SP4;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyMapDiaryWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyMapDiaryWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecovillaraza.MyMapDiary.MyMapDiaryWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -342,6 +517,15 @@
 			buildConfigurations = (
 				207839222CC14B5100225175 /* Debug */,
 				207839232CC14B5100225175 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20AA7B9E2EBA302B00F99017 /* Build configuration list for PBXNativeTarget "MyMapDiaryWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20AA7B9C2EBA302B00F99017 /* Debug */,
+				20AA7B9D2EBA302B00F99017 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

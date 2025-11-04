@@ -151,6 +151,9 @@ struct MapScreen: View {
             .fullScreenCover(isPresented: $viewModel.isCameraPresented) {
                 CameraScreen(pinLoc: viewModel.pinLoc)
             }
+            .onReceive(NotificationCenter.default.publisher(for: .openAddEntry)) { _ in
+                viewModel.showCamera()  
+            }
         }
         .onAppear {
             viewModel.fetchLocations()
