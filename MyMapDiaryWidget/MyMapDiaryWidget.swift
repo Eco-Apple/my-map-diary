@@ -54,11 +54,9 @@ struct MyMapDiaryWidgetEntryView: View {
                 Text("Add Diary ✨")
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                    .foregroundStyle(.white.opacity(0.95))
             }
             .padding(6)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.accentColor.cornerRadius(8))
             .widgetURL(URL(string: "mymapdiary://addEntry"))
 
         default:
@@ -68,13 +66,11 @@ struct MyMapDiaryWidgetEntryView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 60, height: 60)
-                        .foregroundStyle(.white)
                         .padding(.bottom, 6)
                     
                     Text("Add Diary ✨")
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .foregroundStyle(.white.opacity(0.95))
                 }
             }
             .widgetURL(URL(string: "mymapdiary://addEntry"))
